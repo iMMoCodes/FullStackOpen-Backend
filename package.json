@@ -1,0 +1,27 @@
+{
+  "name": "fullstackopen-backend",
+  "version": "1.0.0",
+  "description": "backend part",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iMMoCodes/FullStackOpen-Backend.git"
+  },
+  "author": "iMMoCodes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iMMoCodes/FullStackOpen-Backend/issues"
+  },
+  "homepage": "https://github.com/iMMoCodes/FullStackOpen-Backend#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
