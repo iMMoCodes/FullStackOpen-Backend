@@ -1,0 +1,7 @@
+POST https://immo-phonebook.herokuapp.com/api/persons
+Content-Type: application/json
+
+{
+    "name": "test",
+    "number": 1234
+}
