@@ -72,17 +72,17 @@ app.post('/api/persons', (req, res, next) => {
     });
   }
 
+  if (body.number.toString().length < 8) {
+    return res.status(400).json({
+      error: 'Number has to be atleast 8 characters',
+    });
+  }
+
   const person = new Person({
     id: body.id,
     name: body.name,
     number: body.number,
   });
-
-  // if (Person.find({ name: person.name })) {
-  //   return res.status(400).json({
-  //     error: "There's already user with this name",
-  //   });
-  // }
 
   person
     .save()
@@ -119,6 +119,11 @@ const errorHandler = (error, req, res, next) => {
     return res
       .status(400)
       .send({ error: "There's already user with this name" });
+  }
+  if (error.name === 'ValidationError') {
+    return res
+      .status(400)
+      .send({ error: 'Username has to be atleast 3 characters long' });
   }
   next(error);
 };
