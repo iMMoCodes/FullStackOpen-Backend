@@ -13,8 +13,15 @@ mongoose
   });
 
 const personSchema = new mongoose.Schema({
-  name: String,
-  number: Number,
+  name: {
+    type: String,
+    unique: true,
+    required: true,
+  },
+  number: {
+    type: Number,
+    required: true,
+  },
 });
 
 personSchema.set('toJSON', {

@@ -16,30 +16,6 @@ app.use(
 app.use(cors());
 app.use(express.static('build'));
 
-// PERSON LIST
-let persons = [
-  {
-    id: 1,
-    name: 'Arto Hellas',
-    number: '040-123456',
-  },
-  {
-    id: 2,
-    name: 'Ada Lovelace',
-    number: '39-44-5323523',
-  },
-  {
-    id: 3,
-    name: 'Dan Abramov',
-    number: '12-43-234345',
-  },
-  {
-    id: 4,
-    name: 'Mary Poppendick',
-    number: '39-23-6423122',
-  },
-];
-
 // ROUTES
 // INFO
 app.get('/info', (req, res, next) => {
@@ -87,7 +63,7 @@ app.delete('/api/persons/:id', (req, res, next) => {
 });
 
 // CREATE
-app.post('/api/persons', (req, res) => {
+app.post('/api/persons', (req, res, next) => {
   const body = req.body;
 
   if (!body.name || !body.number) {
@@ -102,9 +78,18 @@ app.post('/api/persons', (req, res) => {
     number: body.number,
   });
 
-  person.save().then((savedPerson) => {
-    res.json(savedPerson);
-  });
+  // if (Person.find({ name: person.name })) {
+  //   return res.status(400).json({
+  //     error: "There's already user with this name",
+  //   });
+  // }
+
+  person
+    .save()
+    .then((savedPerson) => {
+      res.json(savedPerson);
+    })
+    .catch((error) => next(error));
 });
 
 // UPDATE
@@ -129,6 +114,11 @@ const errorHandler = (error, req, res, next) => {
 
   if (error.name === 'CastError') {
     return res.status(400).send({ error: 'malformatted id' });
+  }
+  if (error.code === 11000) {
+    return res
+      .status(400)
+      .send({ error: "There's already user with this name" });
   }
   next(error);
 };
