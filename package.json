@@ -24,6 +24,7 @@
   "homepage": "https://github.com/iMMoCodes/FullStackOpen-Backend#readme",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^12.0.4",
     "express": "^4.17.2",
     "mongoose": "^6.1.6",
     "morgan": "^1.10.0"
